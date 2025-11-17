@@ -43,7 +43,7 @@ transform = transforms.Compose([
     transforms.Grayscale(num_output_channels=1),  # assure que l'image est en niveau de gris
     transforms.Resize((28, 28)),                   # redimensionne à 28x28
     transforms.ToTensor(),                         # convertit en tenseur
-    transforms.Normalize((0.1307,), (0.3081,))     # normalisation MNIST
+    transforms.Normalize((0.1307,), (0.3081,))     # normalisation MNIST dispo sur le site du dataset
 ])
 
 #Charge l'image
