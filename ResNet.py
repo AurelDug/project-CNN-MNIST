@@ -10,9 +10,11 @@ from datasets import load_dataset
 from io import BytesIO
 import requests
 from huggingface_hub import login
+import os
 
-#s'authertifier avec son token sur hf
-login(token="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")
+#s'authertifier avec son token sur hf, necessite de creer une variable d'environnement HF_TOKEN
+HF_TOKEN = os.getenv("HF_TOKEN")
+login(token=HF_TOKEN)
 
 #chargement du dataset (ImageNet)
 
