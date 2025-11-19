@@ -9,8 +9,9 @@ import matplotlib.pyplot as plt
 #Aquisition des données
 transform = transforms.Compose([
     transforms.ToTensor(),
-    transforms.Normalize((0.1307,), (0.3081,))  # moyenne et écart-type du dataset MNIST
+    transforms.Normalize((0.0,), (0.0,))  # moyenne et écart-type du dataset MNIST
 ])
+
 
 train_dataset = datasets.MNIST(root='./data', train=True, transform=transform, download=True) # 60k images d'entrainement
 test_dataset = datasets.MNIST(root='./data', train=False, transform=transform, download=True) # 10k images de test
@@ -33,7 +34,7 @@ class CNN(nn.Module):
         self.fc1 = nn.Linear(9216, 128) #coucche intermédiare dans le NN pour smooth l'apprentissage
         self.fc2 = nn.Linear(128, 10) # creation de l'out layer de 0 a 9 soit 10 neuronnes 
 
-    def forward(self, x):
+    def forward(self, x):   
         x = F.relu(self.conv1(x)) #relu classique comme fonction d'activation pour chaque convolution 
         x = F.relu(self.conv2(x))
         x = F.max_pool2d(x, 2) # pooling 2*2 pour reduire la taille des features map
@@ -66,7 +67,7 @@ def train(model, device, train_loader, optimizer, epoch):
             print(f"Train Epoch: {epoch} [{batch_idx * len(data)}/{len(train_loader.dataset)} "
                   f"({100. * batch_idx / len(train_loader):.0f}%)]\tLoss: {loss.item():.6f}")
 
-# test du modele
+#def test du modele
 def test(model, device, test_loader):
     model.eval() #mets le modele en mode tet
     test_loss = 0 #init des indicateurs
